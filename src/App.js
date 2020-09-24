@@ -1,4 +1,4 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
@@ -7,11 +7,10 @@ import "./App.css";
 import { AppContext } from "./libs/contextLib";
 import { Auth } from "aws-amplify";
 
-
 function App() {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
-  
+
   useEffect(() => {
     onLoad();
   }, []);
@@ -20,9 +19,8 @@ function App() {
     try {
       await Auth.currentSession();
       userHasAuthenticated(true);
-    }
-    catch(e) {
-      if (e !== 'No current user') {
+    } catch (e) {
+      if (e !== "No current user") {
         alert(e);
       }
     }
@@ -34,20 +32,21 @@ function App() {
   }
   //https://serverless-stack.com/chapters/load-the-state-from-the-session.html
   return (
-    !isAuthenticating &&
-    <div className="App container">
-      <Navbar fluid collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to="/">Easy Help</Link>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav pullRight>
-          {isAuthenticated
-              ? <NavItem onClick={handleLogout}>Logout</NavItem>
-              : <>
+    !isAuthenticating && (
+      <div className="App container">
+        <Navbar fluid collapseOnSelect>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <Link to="/">Easy Help</Link>
+            </Navbar.Brand>
+            <Navbar.Toggle />
+          </Navbar.Header>
+          <Navbar.Collapse>
+            <Nav pullRight>
+              {isAuthenticated ? (
+                <NavItem onClick={handleLogout}>Logout</NavItem>
+              ) : (
+                <>
                   <LinkContainer to="/signup">
                     <NavItem>Signup</NavItem>
                   </LinkContainer>
@@ -55,14 +54,15 @@ function App() {
                     <NavItem>Login</NavItem>
                   </LinkContainer>
                 </>
-            }
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
-        <Routes />
-      </AppContext.Provider>
-    </div>
+              )}
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+        <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+          <Routes />
+        </AppContext.Provider>
+      </div>
+    )
   );
 }
 export default App;

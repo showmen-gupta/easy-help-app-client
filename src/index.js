@@ -1,11 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import { BrowserRouter as Router } from 'react-router-dom';
-import * as serviceWorker from './serviceWorker';
-import { Amplify } from 'aws-amplify';
-import config from './config';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import { BrowserRouter as Router } from "react-router-dom";
+import * as serviceWorker from "./serviceWorker";
+import { Amplify } from "aws-amplify";
+import config from "./config";
 
 Amplify.configure({
   Auth: {
@@ -26,7 +26,7 @@ Amplify.configure({
         name: "users",
         endpoint: config.apiGateway.URL,
         region: config.apiGateway.REGION
-      },
+      }
     ]
   }
 });
@@ -34,7 +34,7 @@ ReactDOM.render(
   <Router>
     <App />
   </Router>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

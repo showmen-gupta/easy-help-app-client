@@ -5,9 +5,9 @@ import "./Login.css";
 import { useAppContext } from "../libs/contextLib";
 
 export default function Login() {
-    const { userHasAuthenticated } = useAppContext();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+  const { userHasAuthenticated } = useAppContext();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   function validateForm() {
     return email.length > 0 && password.length > 0;
@@ -16,11 +16,11 @@ export default function Login() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-        await Auth.signIn(email, password);
-        userHasAuthenticated(true);
-      } catch (e) {
-        alert(e.message);
-      }
+      await Auth.signIn(email, password);
+      userHasAuthenticated(true);
+    } catch (e) {
+      alert(e.message);
+    }
   }
 
   return (

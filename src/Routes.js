@@ -4,7 +4,6 @@ import Home from "./containers/Home";
 import Login from "./containers/Login";
 import NotFound from "./containers/NotFound";
 
-
 export default function Routes() {
   return (
     <Switch>
@@ -13,11 +12,11 @@ export default function Routes() {
       </Route>
       <Route exact path="/login">
         <Login />
-        </Route>
-        {/* Finally, catch all unmatched routes */}
-        <Route>
-            <NotFound />
-        </Route>
+      </Route>
+      {/* Finally, catch all unmatched routes */}
+      <Route>
+        <NotFound />
+      </Route>
     </Switch>
   );
 }
