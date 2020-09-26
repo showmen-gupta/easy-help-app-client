@@ -14,7 +14,7 @@ export default function UserInfo() {
   const history = useHistory();
   const [fields, handleFieldChange] = useFormFields({
     fullname: "",
-    age: 0,
+    age: "",
     phone: "",
     gender: "",
     address: "",
@@ -48,19 +48,8 @@ export default function UserInfo() {
     setIsLoading(true);
 
     try {
-      const attachment = file.current ? await s3Upload(file.current) : null;
-
-      await addUserInfo(
-        fields.fullname,
-        fields.age,
-        fields.phone,
-        fields.gender,
-        fields.address,
-        attachment,
-        fields.lat,
-        fields.long,
-        fields.userType
-      );
+      //fields.attachment = file.current ? await s3Upload(file.current) : null;
+      await addUserInfo(fields);
       history.push("/");
     } catch (e) {
       onError(e);
@@ -68,13 +57,14 @@ export default function UserInfo() {
     }
   }
 
-  function addUserInfo(content) {
+  function addUserInfo(fields) {
     const headers = new Headers();
+    headers.append("Content-Type", "application/json");
     headers.append("Access-Control-Allow-Origin", "*");
     headers.append("Access-Control-Allow-Credentials", "true");
     return API.post("users", "/users", {
-      body: content,
-      headers: headers
+      headers: headers,
+      body: fields
     });
   }
 
