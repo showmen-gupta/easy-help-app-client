@@ -11,7 +11,7 @@ import LoaderButton from "../components/LoaderButton";
 import { useAppContext } from "../libs/contextLib";
 import { useFormFields } from "../libs/hooksLib";
 import { onError } from "../libs/errorLib";
-import "./Signup.css";
+import "../styles/css/Signup.css";
 
 export default function Signup() {
   const [fields, handleFieldChange] = useFormFields({

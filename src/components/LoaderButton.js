@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Glyphicon } from "react-bootstrap";
-import "./LoaderButton.css";
+import "../styles/css/LoaderButton.css";
 import PropTypes from "prop-types";
 
 class LoaderButton extends React.Component {

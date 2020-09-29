@@ -1,7 +1,7 @@
 export default {
   s3: {
-    REGION: "eu-north-1",
-    BUCKET: "easy-help-uploads"
+    REGION: "eu-central-1",
+    BUCKET: "easy-help-app-uploads"
   },
   apiGateway: {
     REGION: "eu-central-1",
@@ -13,5 +13,6 @@ export default {
     APP_CLIENT_ID: "5ua9761c530lne6ej1f75psvle",
     IDENTITY_POOL_ID: "eu-central-1:4120dbdd-65db-4631-b6e4-051f11a4db06"
   },
-  MAX_ATTACHMENT_SIZE: 5000000
+  MAX_ATTACHMENT_SIZE: 5000000,
+  API_KEY: "AIzaSyBf53cJdRoYn5kZ-qBKC1ASIgP-_ibabtw"
 };

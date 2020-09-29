@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import Routes from "./Routes";
-import "./App.css";
+import "../src/styles/css/App.css";
 import { AppContext } from "./libs/contextLib";
 import { Auth } from "aws-amplify";
 import { onError } from "./libs/errorLib";

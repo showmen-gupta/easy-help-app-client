@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
@@ -9,8 +9,9 @@ import { useFormFields } from "../libs/hooksLib";
 //import { s3Upload } from "../libs/awsLib";
 import "../styles/css/UserInfo.css";
 
-export default function UserInfo() {
+export default function UpdateUserInfo() {
   const file = useRef(null);
+  const { id } = useParams();
   const history = useHistory();
   const [fields, handleFieldChange] = useFormFields({
     fullname: "",
@@ -25,6 +26,12 @@ export default function UserInfo() {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    function loadUsers() {
+      return API.get("users", `/users/${id}`);
+    }
+  });
 
   function validateForm() {
     return (
@@ -48,9 +55,8 @@ export default function UserInfo() {
     setIsLoading(true);
 
     try {
-      //console.log(file.current);
       //fields.attachment = file.current ? await s3Upload(file.current) : null;
-      await addUserInfo(fields);
+      await updateUserInfo(fields);
       history.push("/");
       alert("successfully added user");
     } catch (e) {
@@ -59,7 +65,7 @@ export default function UserInfo() {
     }
   }
 
-  function addUserInfo(fields) {
+  function updateUserInfo(fields) {
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Access-Control-Allow-Origin", "*");
@@ -68,6 +74,10 @@ export default function UserInfo() {
       headers: headers,
       body: fields
     });
+  }
+
+  function deleteUser() {
+    return API.del("users", `/removeUser/${id}`);
   }
 
   return (
@@ -125,15 +135,6 @@ export default function UserInfo() {
           disabled={!validateForm()}
         >
           Update
-        </LoaderButton>
-        <LoaderButton
-          block
-          type="submit"
-          bsSize="large"
-          isLoading={isLoading}
-          disabled={!validateForm()}
-        >
-          Delete
         </LoaderButton>
       </form>
     </div>
