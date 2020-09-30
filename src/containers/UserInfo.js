@@ -6,7 +6,7 @@ import config from "../config";
 import { API } from "aws-amplify";
 import { onError } from "../libs/errorLib";
 import { useFormFields } from "../libs/hooksLib";
-//import { s3Upload } from "../libs/awsLib";
+import { s3Upload } from "../libs/awsLib";
 import "../styles/css/UserInfo.css";
 
 export default function UserInfo() {
@@ -49,7 +49,7 @@ export default function UserInfo() {
 
     try {
       //console.log(file.current);
-      //fields.attachment = file.current ? await s3Upload(file.current) : null;
+      fields.attachment = file.current ? await s3Upload(file.current) : null;
       await addUserInfo(fields);
       history.push("/");
       alert("successfully added user");
@@ -125,15 +125,6 @@ export default function UserInfo() {
           disabled={!validateForm()}
         >
           Update
-        </LoaderButton>
-        <LoaderButton
-          block
-          type="submit"
-          bsSize="large"
-          isLoading={isLoading}
-          disabled={!validateForm()}
-        >
-          Delete
         </LoaderButton>
       </form>
     </div>
