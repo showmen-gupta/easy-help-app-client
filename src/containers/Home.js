@@ -4,6 +4,7 @@ import MapContainer from "../components/MapContainer";
 import { useAppContext } from "../libs/contextLib";
 import { onError } from "../libs/errorLib";
 import "../styles/css/Home.css";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [users, setUsers] = useState([]);
@@ -36,11 +37,17 @@ export default function Home() {
       <div className="lander">
         <h1>Easy Help App</h1>
         <p>A helping in pandemic</p>
+        <div>
+          <Link to="/login" className="btn btn-info btn-lg">
+            Login
+          </Link>
+          <Link to="/signup" className="btn btn-success btn-lg">
+            Signup
+          </Link>
+        </div>
       </div>
     );
   }
-
-  //AIzaSyBf53cJdRoYn5kZ-qBKC1ASIgP-_ibabtw
 
   function filterLocations() {
     const arrayofLocations = [];
