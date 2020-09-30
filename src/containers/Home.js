@@ -62,7 +62,7 @@ export default function Home() {
 
   return (
     <div className="Home">
-      {isAuthenticated ? renderUsers() : renderLander()}
+      {isAuthenticated && !isLoading ? renderUsers() : renderLander()}
     </div>
   );
 }
