@@ -18,7 +18,6 @@ export default function Home() {
       }
       try {
         const users = await loadUsers();
-        //console.log(users);
         setUsers(users);
       } catch (e) {
         onError(e);
@@ -36,7 +35,7 @@ export default function Home() {
     return (
       <div className="lander">
         <h1>Easy Help App</h1>
-        <p>A helping in pandemic</p>
+        <p>A helping agent in pandemic</p>
         <div>
           <Link to="/login" className="btn btn-info btn-lg">
             Login

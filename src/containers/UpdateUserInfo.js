@@ -29,7 +29,7 @@ export default function UpdateUserInfo() {
 
   useEffect(() => {
     function loadUsers() {
-      return API.get("users", `/users/${id}`);
+      return API.get("users", `/getUser/${id}`);
     }
   });
 
