@@ -19,8 +19,8 @@ export default function UserInfo() {
     gender: "",
     address: "",
     attachment: "",
-    lat: 58.96417684,
-    long: 5.6501957,
+    lat: "",
+    long: "",
     userType: 0
   });
 
@@ -102,6 +102,22 @@ export default function UserInfo() {
             type="text"
             onChange={handleFieldChange}
             placeholder="Gender"
+          />
+        </FormGroup>
+        <FormGroup controlId="lat">
+          <FormControl
+            value={fields.lat}
+            type="text"
+            onChange={handleFieldChange}
+            placeholder="latitude"
+          />
+        </FormGroup>
+        <FormGroup controlId="long">
+          <FormControl
+            value={fields.long}
+            type="text"
+            onChange={handleFieldChange}
+            placeholder="longitude"
           />
         </FormGroup>
         <FormGroup controlId="address">
