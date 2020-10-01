@@ -44,11 +44,6 @@ export default function Home() {
             Signup
           </Link>
         </div>
-        <div>
-          <Link to="/users/userinfo" className="btn btn-primary btn-lg">
-            UserInfo
-          </Link>
-        </div>
       </div>
     );
   }
