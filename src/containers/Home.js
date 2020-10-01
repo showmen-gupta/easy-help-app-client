@@ -64,7 +64,11 @@ export default function Home() {
 
   function renderUsers() {
     const locations = filterLocations();
-    return <MapContainer stores={locations} />;
+    return (
+      <div className="users">
+        <MapContainer stores={locations} />
+      </div>
+    );
   }
 
   return (

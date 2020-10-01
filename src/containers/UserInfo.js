@@ -48,7 +48,6 @@ export default function UserInfo() {
     setIsLoading(true);
 
     try {
-      //console.log(file.current);
       fields.attachment = file.current ? await s3Upload(file.current) : null;
       await addUserInfo(fields);
       history.push("/");
