@@ -76,7 +76,7 @@ export default function UserInfo() {
           value={fields.fullname}
           type="text"
           onChange={handleFieldChange}
-          placeholder="Full Name"
+          placeholder="Name"
         />
       </FormGroup>
       <form onSubmit={handleSubmit}>
