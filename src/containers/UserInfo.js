@@ -1,13 +1,12 @@
 import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import LoaderButton from "../components/LoaderButton";
 import config from "../config";
 import { API } from "aws-amplify";
 import { onError } from "../libs/errorLib";
 import { useFormFields } from "../libs/hooksLib";
 import { s3Upload } from "../libs/awsLib";
 import "../styles/css/UserInfo.css";
+import InfoForm from "../components/InfoForm";
 
 export default function UserInfo() {
   const file = useRef(null);
@@ -71,76 +70,14 @@ export default function UserInfo() {
 
   return (
     <div className="UserInfo">
-      <FormGroup controlId="fullname">
-        <FormControl
-          value={fields.fullname}
-          type="text"
-          onChange={handleFieldChange}
-          placeholder="Name"
-        />
-      </FormGroup>
       <form onSubmit={handleSubmit}>
-        <FormGroup controlId="age">
-          <FormControl
-            value={fields.age}
-            type="number"
-            onChange={handleFieldChange}
-            placeholder="Age"
-          />
-        </FormGroup>
-        <FormGroup controlId="phone">
-          <FormControl
-            value={fields.phone}
-            type="text"
-            onChange={handleFieldChange}
-            placeholder="Phone"
-          />
-        </FormGroup>
-        <FormGroup controlId="gender">
-          <FormControl
-            value={fields.gender}
-            type="text"
-            onChange={handleFieldChange}
-            placeholder="Gender"
-          />
-        </FormGroup>
-        <FormGroup controlId="lat">
-          <FormControl
-            value={fields.lat}
-            type="text"
-            onChange={handleFieldChange}
-            placeholder="latitude"
-          />
-        </FormGroup>
-        <FormGroup controlId="long">
-          <FormControl
-            value={fields.long}
-            type="text"
-            onChange={handleFieldChange}
-            placeholder="longitude"
-          />
-        </FormGroup>
-        <FormGroup controlId="address">
-          <FormControl
-            value={fields.address}
-            componentClass="textarea"
-            onChange={handleFieldChange}
-            placeholder="Address"
-          />
-        </FormGroup>
-        <FormGroup controlId="file">
-          <ControlLabel>Profile Image</ControlLabel>
-          <FormControl onChange={handleImageChange} type="file" />
-        </FormGroup>
-        <LoaderButton
-          block
-          type="submit"
-          bsSize="large"
+        <InfoForm
+          fields={fields}
+          handleFieldChange={handleFieldChange}
+          handleImageChange={handleImageChange}
+          validateForm={validateForm}
           isLoading={isLoading}
-          disabled={!validateForm()}
-        >
-          Update
-        </LoaderButton>
+        />
       </form>
     </div>
   );
