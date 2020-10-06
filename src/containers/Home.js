@@ -27,7 +27,7 @@ export default function Home() {
     onLoad();
   }, [isAuthenticated]);
 
-  function loadUsers() {
+  async function loadUsers() {
     return API.get("users", "/userList");
   }
 

@@ -4,15 +4,17 @@ import config from "../config";
 import { API } from "aws-amplify";
 import { onError } from "../libs/errorLib";
 import { useFormFields } from "../libs/hooksLib";
-import { s3Upload } from "../libs/awsLib";
+import { s3Upload, getUserinfo } from "../libs/awsLib";
 import "../styles/css/UserInfo.css";
 import InfoForm from "../components/InfoForm";
 
 export default function UserInfo() {
   const file = useRef(null);
   const history = useHistory();
+
   const [fields, handleFieldChange] = useFormFields({
     fullname: "",
+    email: "",
     age: "",
     phone: "",
     gender: "",
@@ -48,6 +50,7 @@ export default function UserInfo() {
 
     try {
       fields.attachment = file.current ? await s3Upload(file.current) : null;
+      fields.email = await getUserinfo();
       await addUserInfo(fields);
       history.push("/");
       alert("successfully added user");
