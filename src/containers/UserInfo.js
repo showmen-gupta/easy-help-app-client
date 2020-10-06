@@ -59,7 +59,6 @@ export default function UserInfo() {
 
   function addUserInfo(fields) {
     const headers = new Headers();
-    console.log(fields);
     headers.append("Content-Type", "application/json");
     headers.append("Access-Control-Allow-Origin", "*");
     headers.append("Access-Control-Allow-Credentials", "true");
