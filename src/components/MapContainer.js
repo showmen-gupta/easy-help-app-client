@@ -1,9 +1,26 @@
 import React from "react";
-import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 import PropTypes from "prop-types";
 import config from "../config";
+import googleMapIcon from "google-maps-icons";
+
+const options = { scale: 2, color: "800000" };
+const iconUrl = googleMapIcon("dice", options);
 
 class MapContainer extends React.Component {
+  handleToggleOpen = () => {};
+
+  handleToggleClose = () => {};
+
+  displayInfoWindow = () => {
+    if (this.props.showInfo)
+      return (
+        <InfoWindow onCloseClick={this.handleToggleClose()}>
+          <span>Something</span>
+        </InfoWindow>
+      );
+  };
+
   displayMarkers = () => {
     return this.props.stores.map((store, index) => {
       return (
@@ -16,7 +33,8 @@ class MapContainer extends React.Component {
           }}
           animation={this.props.google.maps.Animation.DROP}
           title={store.title}
-          onClick={() => console.log("You clicked me!")}
+          icon={{ url: iconUrl }}
+          onClick={() => this.handleToggleOpen()}
         />
       );
     });
@@ -44,7 +62,8 @@ const mapStyles = {
 MapContainer.propTypes = {
   google: PropTypes.object,
   stores: PropTypes.any,
-  title: PropTypes.string
+  title: PropTypes.string,
+  showInfo: PropTypes.bool
 };
 
 export default GoogleApiWrapper({
