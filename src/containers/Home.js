@@ -72,11 +72,6 @@ export default function Home() {
 
   return (
     <div className="Home">
-      <div className="userInfobtn">
-        <Link to="/users/userinfo" className="btn btn-primary btn-lg">
-          UserInfo
-        </Link>
-      </div>
       {isAuthenticated && !isLoading ? renderUsers() : renderLander()}
     </div>
   );
