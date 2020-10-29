@@ -54,7 +54,8 @@ export default function Home() {
       const location = {
         title: element.fullname,
         latitude: element.lat,
-        longitude: element.long
+        longitude: element.long,
+        address: element.address
       };
       arrayofLocations.push(location);
     });

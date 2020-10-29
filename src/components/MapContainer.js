@@ -1,24 +1,67 @@
-import React from "react";
+import React, { Component } from "react";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 import PropTypes from "prop-types";
 import config from "../config";
 import googleMapIcon from "google-maps-icons";
+import { Button } from "react-bootstrap";
 
 const options = { scale: 2, color: "800000" };
 const iconUrl = googleMapIcon("dice", options);
 
-class MapContainer extends React.Component {
-  handleToggleOpen = () => {};
+class MapContainer extends Component {
+  state = {
+    activeMarker: {},
+    title: {},
+    position: {},
+    address: "",
+    showingInfoWindow: false
+  };
 
-  handleToggleClose = () => {};
+  onMarkerClick = (props, marker) => {
+    console.log(props);
+    this.setState({
+      activeMarker: marker,
+      title: props.title,
+      position: props.position,
+      address: props.address,
+      showingInfoWindow: true
+    });
+  };
+
+  onInfoWindowClose = () => {
+    this.setState({
+      activeMarker: null,
+      showingInfoWindow: false
+    });
+  };
+
+  onMapClicked = () => {
+    if (this.state.showingInfoWindow)
+      this.setState({
+        activeMarker: null,
+        showingInfoWindow: false
+      });
+  };
 
   displayInfoWindow = () => {
-    if (this.props.showInfo)
-      return (
-        <InfoWindow onCloseClick={this.handleToggleClose()}>
-          <span>Something</span>
-        </InfoWindow>
-      );
+    return (
+      <InfoWindow
+        marker={this.state.activeMarker}
+        onClose={this.onInfoWindowClose}
+        visible={this.state.showingInfoWindow}
+      >
+        <div>
+          <h4>{this.state.title}</h4>
+          <div>{this.state.address}</div>
+          <div>
+            {this.state.position.lat}, {this.state.position.lng}
+          </div>
+          <div>
+            <Button>Connect</Button>
+          </div>
+        </div>
+      </InfoWindow>
+    );
   };
 
   displayMarkers = () => {
@@ -31,10 +74,10 @@ class MapContainer extends React.Component {
             lat: store.latitude,
             lng: store.longitude
           }}
-          animation={this.props.google.maps.Animation.DROP}
           title={store.title}
           icon={{ url: iconUrl }}
-          onClick={() => this.handleToggleOpen()}
+          onClick={this.onMarkerClick}
+          address={store.address}
         />
       );
     });
@@ -44,11 +87,13 @@ class MapContainer extends React.Component {
     return (
       <Map
         google={this.props.google}
-        zoom={12}
+        zoom={10}
         style={mapStyles}
         initialCenter={{ lat: 58.96517684, lng: 5.7501957 }}
+        onClick={this.onMapClicked}
       >
         {this.displayMarkers()}
+        {this.displayInfoWindow()}
       </Map>
     );
   }
@@ -56,13 +101,15 @@ class MapContainer extends React.Component {
 
 const mapStyles = {
   width: "100%",
-  height: "100%"
+  height: "100%",
+  position: "relative"
 };
 
 MapContainer.propTypes = {
   google: PropTypes.object,
   stores: PropTypes.any,
   title: PropTypes.string,
+  address: PropTypes.string,
   showInfo: PropTypes.bool
 };
 
